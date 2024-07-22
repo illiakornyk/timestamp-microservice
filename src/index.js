@@ -17,12 +17,14 @@ const server = http.createServer((req, res) => {
   } else if (dateString) {
     // Handle date parameter
     let date;
-    if (!isNaN(dateString)) {
-      // If dateString is a valid timestamp
-      date = new Date(parseInt(dateString));
+    const decodedDateString = decodeURIComponent(dateString);
+
+    if (!isNaN(decodedDateString)) {
+      // If decodedDateString is a valid timestamp
+      date = new Date(parseInt(decodedDateString));
     } else {
-      // If dateString is a date string
-      date = new Date(dateString);
+      // If decodedDateString is a date string
+      date = new Date(decodedDateString);
     }
 
     if (date.toString() === "Invalid Date") {
