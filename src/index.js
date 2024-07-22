@@ -15,6 +15,24 @@ const server = http.createServer((req, res) => {
       utc: now.toUTCString(),
     };
   } else if (dateString) {
+    // Handle date parameter
+    let date;
+    if (!isNaN(dateString)) {
+      // If dateString is a valid timestamp
+      date = new Date(parseInt(dateString));
+    } else {
+      // If dateString is a date string
+      date = new Date(dateString);
+    }
+
+    if (date.toString() === "Invalid Date") {
+      response = { error: "Invalid Date" };
+    } else {
+      response = {
+        unix: date.getTime(),
+        utc: date.toUTCString(),
+      };
+    }
   } else {
     response = { error: "Invalid Date" };
   }
