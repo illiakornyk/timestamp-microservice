@@ -7,6 +7,18 @@ const server = http.createServer((req, res) => {
   const dateString = path.split("/api/")[1];
   let response;
 
+  if (path === "/api" || path === "/api/") {
+    // Handle empty date parameter
+    const now = new Date();
+    response = {
+      unix: now.getTime(),
+      utc: now.toUTCString(),
+    };
+  } else if (dateString) {
+  } else {
+    response = { error: "Invalid Date" };
+  }
+
   res.writeHead(200, { "Content-Type": "application/json" });
   res.end(JSON.stringify(response));
 });
