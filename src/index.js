@@ -37,7 +37,10 @@ const server = http.createServer((req, res) => {
     response = { error: "Invalid Date" };
   }
 
-  res.writeHead(200, { "Content-Type": "application/json" });
+  res.writeHead(200, {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "https://www.freecodecamp.org",
+  });
   res.end(JSON.stringify(response));
 });
 
